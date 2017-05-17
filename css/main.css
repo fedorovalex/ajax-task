@@ -1,0 +1,49 @@
+.global {
+    position: relative;
+    display: inline-block;
+    height: 512px;
+    background-color: chartreuse;
+}
+
+.button, .main {
+    display: inline-block;
+    
+}
+
+.button {
+    width: 30px;
+}
+
+.button>button {
+    width: 30px;
+    height: 512px;
+}
+
+span {
+    display: inline-block;
+    margin-left: -60px;
+    white-space: nowrap;
+    transform: rotate(-90deg);
+}
+
+.button:last-child>button>span {
+    transform: rotate(90deg);
+    margin-left: -47px;
+}
+
+.main {
+    width: 470px;
+    position: relative;
+    background-color: darkorange;
+}
+
+.title-photos {
+    text-align: center;
+    height: 50px;
+}
+
+.photos {
+    height: 461px;
+    background-color: beige;
+    overflow-y: scroll;
+}
