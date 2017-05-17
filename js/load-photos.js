@@ -26,7 +26,7 @@ function changeTitle(title) {
 }
 
 function addPhoto(photo) {
-    $('.photos').append(`<img src="${photo.thumbnailUrl}">`);
+    $('.photos').append(`<a href="${photo.url}" target="_blank"><img src="${photo.thumbnailUrl}"></a>`);
 }
 
 function cleaningPhotos() {
