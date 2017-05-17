@@ -2,26 +2,25 @@
     position: relative;
     display: inline-block;
     height: 512px;
-    background-color: chartreuse;
 }
 
 .button, .main {
     display: inline-block;
+    background-color: #ECEFF1;
 }
 
 .button {
     width: 30px;
+    float: left;
+}
+
+.button:last-child {
+    float: right;
 }
 
 .button>button {
-    width: 30px;
     height: 512px;
-}
-
-.main {
-    width: 470px;
-    position: relative;
-    background-color: darkorange;
+    width: 30px;
 }
 
 span {
@@ -44,6 +43,6 @@ span {
 
 .photos {
     height: 461px;
-    background-color: beige;
     overflow-y: scroll;
+    width: 470px;
 }
