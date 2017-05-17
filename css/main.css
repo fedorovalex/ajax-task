@@ -7,7 +7,6 @@
 
 .button, .main {
     display: inline-block;
-    
 }
 
 .button {
@@ -17,6 +16,12 @@
 .button>button {
     width: 30px;
     height: 512px;
+}
+
+.main {
+    width: 470px;
+    position: relative;
+    background-color: darkorange;
 }
 
 span {
@@ -31,14 +36,9 @@ span {
     margin-left: -47px;
 }
 
-.main {
-    width: 470px;
-    position: relative;
-    background-color: darkorange;
-}
-
 .title-photos {
     text-align: center;
+    font-size: 25px;
     height: 50px;
 }
 

@@ -1,29 +1,24 @@
 const ROOT = 'http://jsonplaceholder.typicode.com';
-var numAlbum;
+var numAlbum = 1;
 
-function getAlbum(num) {
-    
-    num = (num === undefined) ? "" : "/" + num;
-    
+function getPromiseAjaxGET(url1) {
     return new Promise(function(resolve, reject) {
         $.ajax({
-            url: `${ROOT}/albums${num}`,
+            url: url1,
             method: 'GET'
-        }).then(album => {resolve(album)}, album => {reject(album)});
-    })
+        }).then(data => {resolve(data)}, data => {reject(data)});
+    });
+}
+
+function getAlbum(num) {
+    num = (num === undefined) ? "" : "/" + num;
+    return getPromiseAjaxGET(`${ROOT}/albums${num}`);
 }
 
 function getPhoto(idAlbum, numPhoto) {
-    
     numPhoto = (numPhoto === undefined) ? "" : "/" + numPhoto;
     idAlbum = (idAlbum === undefined) ? "" : "?albumId=" + idAlbum;
-    
-    return new Promise(function(resolve, reject) {
-        $.ajax({
-            url: `${ROOT}/photos${numPhoto}${idAlbum}`,
-            method: 'GET'
-        }).then(photo => {resolve(photo)}, album => {reject(photo)});
-    })
+    return getPromiseAjaxGET(`${ROOT}/photos${numPhoto}${idAlbum}`);
 }
 
 function changeTitle(title) {
@@ -32,25 +27,26 @@ function changeTitle(title) {
 
 function addPhoto(photo) {
     $('.photos').append(`<img src="${photo.thumbnailUrl}">`);
-    
 }
 
 function cleaningPhotos() {
     $('.photos').empty();
 }
 
-function loadAlbum(num) {
+function loadAlbum(num, cetchFunk) {
     getAlbum(num).then(album => {
         changeTitle(album.title);
         cleaningPhotos();
         return getPhoto(album.id);
-    }).then(photos => photos.forEach(addPhoto));
+    }).then(photos => photos.forEach(addPhoto)).catch(cetchFunk);
 }
 
-/*getAlbum(1).then(album => {
-    changeTitle(album.title);
-}, album => alert("Все плохо!"));*/
+$('.button:last-child>button').click(function () {
+    loadAlbum(++numAlbum, error => {alert("Это был последний альбом!"); numAlbum--});
+});
 
-loadAlbum(1);
+$('.button:first-child>button').click(function () {
+    loadAlbum(--numAlbum, error => {alert("Это первый альбом!"); numAlbum++});
+});
 
-//alert("OK");
+loadAlbum(numAlbum);
