@@ -4,21 +4,21 @@
     height: 512px;
 }
 
-.button, .main {
+.container-button, .main {
     display: inline-block;
     background-color: #ECEFF1;
 }
 
-.button {
+.container-button {
     width: 30px;
     float: left;
 }
 
-.button:last-child {
+.button-next {
     float: right;
 }
 
-.button>button {
+button {
     height: 512px;
     width: 30px;
 }
@@ -30,7 +30,7 @@ span {
     transform: rotate(-90deg);
 }
 
-.button:last-child>button>span {
+.button-next span {
     transform: rotate(90deg);
     margin-left: -47px;
 }
