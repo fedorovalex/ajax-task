@@ -2,12 +2,7 @@ const ROOT = 'http://jsonplaceholder.typicode.com';
 var numAlbum = 1;
 
 function getPromiseAjaxGET(url1) {
-    return new Promise(function(resolve, reject) {
-        $.ajax({
-            url: url1,
-            method: 'GET'
-        }).then(data => {resolve(data)}, data => {reject(data)});
-    });
+    return fetch(url1, {method: 'GET'}).then(response => {return response.status == 200 ? response.json() : Promise.reject(response)});
 }
 
 function getAlbum(num) {
@@ -33,20 +28,20 @@ function cleaningPhotos() {
     $('.photos').empty();
 }
 
-function loadAlbum(num, cetchFunk) {
-    getAlbum(num).then(album => {
+function loadAlbum(num) {
+    return getAlbum(num).then(album => {
         changeTitle(album.title);
         cleaningPhotos();
         return getPhoto(album.id);
-    }).then(photos => photos.forEach(addPhoto)).catch(cetchFunk);
+    }).then(photos => photos.forEach(addPhoto));
 }
 
 $('.button:last-child>button').click(function () {
-    loadAlbum(++numAlbum, error => {alert("Это был последний альбом!"); numAlbum--});
+    loadAlbum(++numAlbum).catch(error => {alert("Это был последний альбом!"); numAlbum--});
 });
 
 $('.button:first-child>button').click(function () {
-    loadAlbum(--numAlbum, error => {alert("Это первый альбом!"); numAlbum++});
+    loadAlbum(--numAlbum).catch(error => {alert("Это первый альбом!"); numAlbum++});
 });
 
 loadAlbum(numAlbum);
